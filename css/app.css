@@ -1,0 +1,101 @@
+.clearfix:after {
+    content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0px;
+}
+
+body {
+  padding: 20px;
+  color: #eef;
+  background: #445;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.grid-line {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+  display: block;
+  clear: all;
+}
+.grid-line-header {
+  float: left;
+  width: 100px;
+  font-size: 32px;
+  font-weight: lighter;
+  line-height: 64px;
+}
+.grid-box {
+  width: 64px; height: 64px; border: 2px solid black; background: #889;
+  float: left; margin-right: 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+.grid-box.current {
+  background: #ccd;
+}
+
+
+.master-controls {
+  float: right;
+  border: 2px solid black;
+  padding: 20px;
+  border-radius: 5px;
+  background: #556;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+
+}
+
+button {
+  border: 2px solid black;
+  font-size: 20px;
+}
+
+h1 {
+  font-weight: lighter;
+  font-size: 5em;
+  margin: 0; padding: 0;
+}
+h2 {
+  font-weight: lighter;
+  font-size: 2em;
+  margin: 0; padding: 0;
+}
+
+.controls {
+  margin-top: 50px;
+}
+
+
+.control-group {
+  box-sizing: border-box;
+  width: 20%;
+  float: left;
+  border: 2px solid black;
+  margin-right: 10px;
+  padding: 20px;
+  border-radius: 5px;
+  background: #556;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+.control-group label {
+  line-height: 32px;
+  width: 100px;
+  display: block;
+  float: left;
+}
+
+.control-group input[type="range"] {
+  height: 32px;
+}
+
+
+footer {
+  margin-top: 50px;
+}
+
+
+a:link, a:visited {
+  color: #ff0;
+}

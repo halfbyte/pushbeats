@@ -1,0 +1,12 @@
+body {
+  background: #445;
+}
+.grid-line {
+  list-style-type: none;
+  padding: 0;
+  margin: 0
+}
+.grid-box {
+  width: 52px; height: 32px; border: 2px solid black;
+  float: left; margin-right: 10px; display: block;
+}
