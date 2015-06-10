@@ -91,13 +91,56 @@ class PB.Sequencer
       else
         @trigger('grid-clear', row, col)
       console.log(@grid)
-# class PB.Drum
-#   constructor: ->
-#
-#
-#
-# class PB.GridLine
-#   constructor: (prefix) ->
+
+
+class PB.Sound
+  constructor: (@params)->
+    console.log(@params)
+    _.extend(this, Backbone.Events)
+    @on 'value-change', (name, value) =>
+      console.log(@params, name)
+      @params[name].value = value
+      @trigger('value-changed', name, value)
+      console.log("value changed", name, value)
+    @on 'value-inc', (name, inc) =>
+      @params[name].value += inc
+      @params[name].value = @params[name].max if @params[name].value > @params[name].max
+      @trigger('value-changed', name, value)
+    @on 'value-dec', (name, inc) =>
+      @params[name].value += inc
+      @params[name].value = @params[name].max if @params[name].value > @params[name].max
+      @trigger('value-changed', name, value)
+
+
+
+
+class PB.BaseDrum extends PB.Sound
+  params:
+    sweep:
+      min: 0
+      max: 127
+      name: 'Sweep'
+      value: 64
+    decay:
+      min: 0
+      max: 127
+      name: 'Decay'
+      value: 64
+
+
+class PB.SoundView extends Backbone.View
+  events:
+    "change input": "valueChanged"
+
+  valueChanged: (e) =>
+    console.log(e.target)
+    name = e.target.name
+    @model.trigger('value-change', name, e.target.value)
+
+  initialize: =>
+    @model.on 'value-changed', (name, value) =>
+      @$("##{name}").val(value)
+
 
 class PB.PushInterface extends Backbone.View
   initialize: ->
@@ -235,10 +278,66 @@ class PB.PushInterface extends Backbone.View
 
 
 
+basedrum = new PB.Sound
+  sweep:
+    min: 0
+    max: 127
+    name: 'Sweep'
+    value: 64
+  decay:
+    min: 0
+    max: 127
+    name: 'Decay'
+    value: 64
+  start:
+    min: 0
+    max: 127
+    name: 'Decay'
+    value: 64
+  end:
+    min: 0
+    max: 127
+    name: 'Decay'
+    value: 64
+
+snaredrum = new PB.Sound
+  sweep:
+    min: 0
+    max: 127
+    name: 'Sweep'
+    value: 64
+  decay:
+    min: 0
+    max: 127
+    name: 'Decay'
+    value: 64
+  start:
+    min: 0
+    max: 127
+    name: 'Decay'
+    value: 64
+  end:
+    min: 0
+    max: 127
+    name: 'Decay'
+    value: 64
+  lowpass:
+    min: 0
+    max: 127
+    name: 'Frequency'
+    value: 64
+
+
+bdview = new PB.SoundView(model: basedrum, el: '#basedrum')
+sdview = new PB.SoundView(model: snaredrum, el: '#snaredrum')
 
 sequencer = new PB.Sequencer()
 
 PB.MC = new PB.MasterControl(model: sequencer)
 PB.Grid = new PB.GridControl(model: sequencer)
 PB.Push = new PB.PushInterface(model: sequencer)
+
+
+
+
 console.log("UHU")
